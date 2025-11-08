@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Search Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, select:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .highlight {
+            background-color: #f0f8ff;
+        }
+        #nationalIdGroup {
+            display: none; /* Initially hidden */
+        }
+    </style>
+    <script>
+        function toggleNationalIdField() {
+            const documentType = document.getElementById('documentType').value;
+            const nationalIdGroup = document.getElementById('nationalIdGroup');
+            const nationalIdInput = document.getElementById('searchInput');
+
+            if (documentType === 'Drivers_license' || documentType === 'Passport' || documentType === 'National_ID') {
+                nationalIdGroup.style.display = 'block';
+                nationalIdInput.required = true; // Make required
+            } else {
+                nationalIdGroup.style.display = 'none';
+                nationalIdInput.required = false; // Remove required
+                nationalIdInput.value = ''; // Clear the input
+            }
+        }
+    </script>
+</head>
+<body>
+    <form action="/search2" method="get">
+        <div class="form-group">
+            <label for="documentType">Select Document Type</label>
+            <select id="documentType" name="documentname" class="styled-select" required onchange="toggleNationalIdField()">
+                <option value="">Select Document Type</option>
+                <option value="Birth_Certificate">Birth Certificate</option>
+                <option value="Drivers_license">Driver's License</option>
+                <option value="National_ID">National ID</option>
+                <option value="Passport">Passport</option>
+                <option value="Certificate">Certificate</option>
+            </select>
+        </div>
+        <div id="nationalIdGroup" class="form-group">
+            <label for="searchInput">National ID (or Passport Number)</label>
+            <input type="text" id="searchInput" name="nationalid" placeholder="Enter National ID or Passport Number" class="highlight">
+        </div>
+        <div class="form-group">
+            <label for="searchFname">First Name</label>
+            <input type="text" id="searchFname" name="fname" placeholder="Enter First Name">
+        </div>
+        <div class="form-group">
+            <label for="searchLname">Last Name</label>
+            <input type="text" id="searchLname" name="lname" placeholder="Enter Last Name">
+        </div>
+        <button type="submit">Search</button>
+    </form>
+</body>
+</html>

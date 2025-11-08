@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-field {
+            margin-bottom: 15px;
+        }
+
+        .input-field label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .input-field input:focus {
+            border-color: #2E7D32;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: #45a049;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 15px;
+            color: #777;
+            font-size: 14px;
+        }
+         .cancel-btn {
+            background-color: #dc3545;
+            flex: 1;
+            margin-left: 10px;
+        }
+        .cancel-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login for Super user</h2>
+        <form action="/super" method="post">
+            <div class="input-field">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autocomplete="off">
+            </div>
+            <div class="input-field">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="off">
+            </div>
+            <button type="submit" class="login-button">Login</button>
+            
+        </form>
+        <div class="footer-text">Forgot your password?</div><br>
+         <button type="button" class="cancel-btn" onclick="window.location.href='/'">Back</button>
+    </div>
+</body>
+</html>

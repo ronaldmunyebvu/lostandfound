@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Info Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+        input.error {
+            border-color: red;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .cancel-btn {
+            background-color: #dc3545;
+            flex: 1;
+            margin-left: 10px;
+        }
+        .cancel-btn:hover {
+            background-color: #c82333;
+        }
+        /* manage button*/
+         .manage-button {
+            padding: 12px 12px;
+            font-size: 16px;
+            color: white; /* Text color */
+            background-color: #007bff; /* Button color */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            text-decoration: none; /* No underline for links */
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+            margin-top: 1px;
+        }
+
+        .manage-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: scale(1.05); /* Slightly enlarge */
+        }
+
+        .manage-button:active {
+            transform: scale(0.95); /* Slightly shrink when clicked */
+        }
+         .cancel-btn {
+            background-color: #dc3545;
+            flex: 1;
+            margin-left: 10px;
+        }
+        .cancel-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+     
+
+<div class="form-container">
+    <h2>Editing Information Form</h2><br><br>
+   
+
+    <form action="/edit2/{id}" method="post"  id="registrationForm" th:object="${users}">
+        
+          <input type="hidden"  name="id" th:field="*{id}" />
+        <div class="form-group">
+            
+            <label for="city">First Name:</label>
+            <input type="text" id="city" name="fname"   th:field="*{fname}"  required>
+            <div class="error-message" id="cityError">Please enter a valid city (at least 4 letters).</div>
+        </div>
+
+        <div class="form-group">
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="lname" th:field="*{lname}" required>
+            <div class="error-message" id="surnameError">Please enter a valid surname.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="nationalId">National ID:</label>
+            <input type="text" id="nationalId" name="nationalid" th:field="*{nationalid}" required >
+            <div class="error-message" id="nationalIdError">Must be numbers and one letter.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" th:field="*{location}"  required >
+            <div class="error-message" id="locationError">Please enter a valid location.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="documentName">Document Name:</label>
+            <input type="text" id="documentName" name="documentname" th:field="*{documentname}"  required >
+            <div class="error-message" id="documentNameError">Please enter a document name.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="contactNumber">Contact Number:</label>
+            <input type="tel" id="contactNumber" name="contactnumber"  th:field="*{contactnumber}">
+            <div class="error-message" id="contactNumberError">Must start with 07 and be 10 digits long.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="containernumber">Container Number:</label>
+            <input type="number" id="containernumber" name="containernumber"   pattern="^[0-9]+$" th:field="*{containernumber}" required>
+        </div>
+
+        
+
+        <div class="button-container">
+            <button type="submit" class="submit-btn">Submit</button>
+            <button type="button" class="cancel-btn" onclick="window.location.href='/'">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        let valid = true;
+
+        // Clear previous errors
+        document.querySelectorAll('.error-message').forEach(err => err.style.display = 'none');
+        document.querySelectorAll('input').forEach(input => input.classList.remove('error'));
+
+        // City validation
+        const city = document.getElementById('city').value.trim();
+        if (!city.match(/[a-zA-Z]{4,}/)) {
+            document.getElementById('cityError').style.display = 'block';
+            document.getElementById('city').classList.add('error');
+            valid = false;
+        }
+
+        // Surname validation
+        const surname = document.getElementById('surname').value.trim();
+        if (!surname) {
+            document.getElementById('surnameError').style.display = 'block';
+            document.getElementById('surname').classList.add('error');
+            valid = false;
+        }
+
+        // National ID validation
+        const nationalId = document.getElementById('nationalId').value.trim();
+        const nationalIdRegex = /^\d*[A-Za-z]\d*$/;
+        if (!nationalId.match(nationalIdRegex)) {
+            document.getElementById('nationalIdError').style.display = 'block';
+            document.getElementById('nationalId').classList.add('error');
+            valid = false;
+        }
+
+        // Location validation
+        const location = document.getElementById('location').value.trim();
+        if (!location) {
+            document.getElementById('locationError').style.display = 'block';
+            document.getElementById('location').classList.add('error');
+            valid = false;
+        }
+
+        // Document Name validation
+        const documentName = document.getElementById('documentName').value.trim();
+        if (!documentName) {
+            document.getElementById('documentNameError').style.display = 'block';
+            document.getElementById('documentName').classList.add('error');
+            valid = false;
+        }
+
+        // Contact Number validation
+        const contactNumber = document.getElementById('contactNumber').value.trim();
+        const contactNumberRegex = /^07\d{8}$/;
+        if (!contactNumber.match(contactNumberRegex)) {
+            document.getElementById('contactNumberError').style.display = 'block';
+            document.getElementById('contactNumber').classList.add('error');
+            valid = false;
+        }
+
+        if (valid) {
+            this.submit(); // Submit the form if valid
+        }
+    });
+</script>
+   <button type="button" class="cancel-btn" onclick="window.location.href='/'">Back</button>
+</body>
+</html>

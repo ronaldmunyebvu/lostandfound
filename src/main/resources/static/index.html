@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #007BFF; /* Blue background color */
+            color: white;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: lightcyan;
+        }
+        .logo {
+            font-size: 2em; /* Increasesd font size */
+            background-color: white; /* White background for logo */
+            color: black; /* Text color for logo */
+            padding: 10px; /* Padding for better appearance */
+            border-radius: 5px; /* Rounded corners */
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em; /* Increased font size */
+        }
+        .hero-message {
+            text-align: center;
+            margin: 50px 0;
+            font-size: 2em; /* Increased font size */
+     }
+        .blog-section {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            margin-top: 20px;
+            border-radius: 8px;
+            margin-top: 300px;
+        }
+        .blog-section h2 {
+            font-size: 1.5em; /* Increased font size */
+        }
+        .blog-section p {
+            font-size: 1.2em; /* Increased font size */
+        }
+            
+        .search-container {
+            display: flex;
+            width: 300px;
+            margin-left: 400px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 25px 0 0 25px; /* Rounded corners on the left */
+            outline: none;
+            font-size: 20px;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #2E7D32;
+            box-shadow: 0 0 5px rgba(46, 125, 50, 0.5);
+        }
+
+        .search-input::placeholder {
+            color: #999;
+            opacity: 1; /* Firefox lowers opacity for placeholders */
+        }
+
+        .search-button {
+            padding: 12px 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 0 25px 25px 0; /* Rounded corners on the right */
+            background-color: #4CAF50;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .search-button:hover {
+            background-color: #45a049;
+        }
+        
+        .super-admin-button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            background-color: green; /* Vibrant color */
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-left: 20px;
+            
+        }
+
+        .super-admin-button:hover {
+            background-color: lime; /* Darker shade on hover */
+            transform: translateY(-2px);
+        }
+
+        .super-admin-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        /*For current form*/
+        .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px; /* Full viewport height */
+  
+    background-color: black; /* Light background color */
+}
+
+form {
+    background-color: black; /* White background for form */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display: flex;
+    flex-direction: column; /* Vertical layout */
+    width: 500px; /* Fixed width */
+    font-size: 20px;
+}
+
+input[type="text"],input[type="select"] {
+    padding: 10px;
+    margin: 10px 0; /* Space between inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+     width: 200px;
+     font-size: 20px;
+}
+
+input[type="text"].highlight {
+    border-color: #007bff; /* Highlight color for national ID */
+    background-color: #e7f3ff; /* Light blue background for emphasis */
+}
+
+input[type="text"]:focus {
+    border-color: #0056b3; /* Darker blue on focus */
+    outline: none; /* Remove default outline */
+}
+
+button {
+    padding: 10px;
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+.styled-select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 20px;
+    background-color: #fff;
+    appearance: none; /* Remove default dropdown arrow */
+    position: relative;
+}
+
+/* Custom arrow */
+.styled-select::after {
+    content: '▼'; /* Downward arrow */
+    position: absolute;
+    right: 15px; /* Position of the arrow */
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Prevents interaction with the arrow */
+}
+
+.styled-select:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+.styled-select option {
+    padding: 10px; /* Padding for options */
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Lost & Found</div>
+    <nav>
+        <a href="#"><img src="images/home.png" alt="Home" width="20"> Home</a>
+        <a href="/about"><img src="images/group.png" alt="About Us" width="20"> About Us</a>
+        <a href="/contact"><img src="images/phone-call.png" alt="Contact Us" width="20"> Contact Us</a>
+    </nav>
+</header>
+
+<div class="hero-message">
+    This site is for those who have lost documents and national ID.<br><br>
+    <p class="highlight">When searching your document select Document type first then enter your id number only or <br>passport number
+     if your are searching something which does not include <br>id number please enter your Surname(Last Name) and First Name</p>
+     <br><br>
+    <a href="/superAdmin"><button class="super-admin-button">Super Admin</button></a>
+</div>
+
+ <div class="search-container">
+     <form action="/search1" method="get">
+         
+             <div class="form-group">
+                 <label for="searchInput">Select Document type</label>
+                 <select id="documentType" name="documentname" class="styled-select" required>
+        <option value="">Select Document Type</option>
+        <option value="Birth_Certificate">Birth_Certificate</option>
+        <option value="Drivers_license">Drivers_license</option>
+        <option value="National_ID">National_ID</option>
+        <option value="Passport">Passport</option>
+        <option value="Certificate">Certificate</option>
+          </select><br><br>
+          </div>
+        <div class="form-group">
+            <label for="searchNationalid">National ID (or Passport Number)
+            <input type="text" id="searchInput" name="nationalid" placeholder="Enter National ID or Passport Number" class="highlight" autocomplete="off">
+        </div><br><br>
+         
+          <div class="form-group">
+            <label for="searchFname">First Name</label>
+            <input type="text" id="searchFname" name="fname" placeholder="Enter First Name" autocomplete="off">
+        </div><br><br>
+         
+        <div class="form-group">
+            <label for="searchLname">Last Name</label>
+            <input type="text" id="searchLname" name="lname" placeholder="Enter Last Name" autocomplete="off">
+        </div><br><br>
+       
+      
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<div class="blog-section">
+    <h2>Blog</h2>
+    <p>Stay updated with the latest tips and information on how to recover your lost documents.</p>
+    <!-- Add more blog content as needed -->
+</div>
+
+</body>
+</html>
