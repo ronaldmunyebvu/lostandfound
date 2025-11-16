@@ -7,6 +7,7 @@ package LostAndFound.demo.Controllers;
 import LostAndFound.demo.Models.Details;
 import LostAndFound.demo.Repository.NewRepo;
 import LostAndFound.demo.Server01.userService;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -229,5 +231,24 @@ public class controller {
     public String contact(){
         return "contact";
     }
-     }
-
+    
+      @GetMapping("/bulking")
+    public String bulking(){
+        return "bulk";
+    }
+    
+    //Bulk Uploading from Excel sheet
+     @PostMapping("/upload")
+    public String uploadExcelFile(@RequestParam("file") MultipartFile file, Model model) {
+        try {
+            service.saveUsersFromExcel(file.getInputStream());
+              model.addAttribute("message", "File uploaded and data saved successfully!");
+        return "success";
+        } catch (IOException e) {
+            return "Failed to upload file: " + e.getMessage();
+        }
+    }
+    
+     
+}
+     

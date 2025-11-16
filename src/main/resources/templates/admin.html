@@ -104,13 +104,21 @@
         .faint {
             opacity: 0.5; /* Make the input field faint */
         }
+        .manager{
+            display:flex;
+            gap:60px;
+        }
     </style>
 </head>
 <body>
 
 <div class="form-container">
     <h2>Uploading new document</h2><br><br>
-    <a href="/retrieve" class="manage-button">Manage Documents</a><br><br>
+    <div class = "manager">
+         <a href="/retrieve" class="manage-button">Manage Documents</a><br><br>
+    <a href="/bulking" class="manage-button">Bulk Uploading</a><br><br>
+    </div>
+   
 
     <form action="/submited" method="post" enctype="multipart/form-data" id="registrationForm">
         <div th:if="${error}" style="color: red;">
