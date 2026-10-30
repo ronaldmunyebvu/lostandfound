@@ -1,0 +1,21 @@
+{
+  "name": "lostandfound",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "24.x"
+  },
+  "description": "Lost & Found document recovery platform (Vite + React + Node/Express)",
+  "scripts": {
+    "install:all": "npm install && npm --prefix server install && npm --prefix client install",
+    "dev": "concurrently -n server,client -c blue,magenta \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "db:init": "npm --prefix server run db:setup",
+    "db:setup": "npm --prefix server run db:setup",
+    "lint": "npm --prefix client run lint"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

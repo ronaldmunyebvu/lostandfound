@@ -41,6 +41,7 @@ public class controller {
     public String superAdmin1(){
         return "superADMIN";
     }
+    //Admin login details
     @PostMapping("/super")
     public String loginSuper(@RequestParam String username, @RequestParam String password, Model model,
     RedirectAttributes redirectAttributes){
